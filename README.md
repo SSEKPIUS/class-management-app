@@ -1,4 +1,4 @@
-# Title of the project
+# Class Management App
 
 A class management application, created to demonstrate Laravel's task scheduling functionality.
 
@@ -12,7 +12,7 @@ You must have the latest version of [PHP](https://www.php.net/) and [Composer](h
 
 ## 📦 Getting started
 
-First, create a new working directory and change into it:
+First, create a new working directory and `cd` into it:
 
 ```command
 mkdir class-management-app && cd class-management-app
@@ -36,7 +36,7 @@ Generate a new `APP_KEY` by running the following Artisan command:
 php artisan key:generate
 ```
 
-Open the `.env` file and edit the path to the .sqlite database based on your system:
+Open the `.env` file and edit the path to the `.sqlite` database based on your system:
 
 ```text
 [label .env]

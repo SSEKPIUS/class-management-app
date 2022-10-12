@@ -1,24 +1,58 @@
 # Title of the project
 
-Description of the project.
+A class management application, created to demonstrate Laravel's task scheduling functionality.
 
-**Tutorial**: [Link to corresponding BetterStack tutorial]().
+**Tutorial**: [Laravel scheduled tasks]().
 
-![Screenshot or GIF of the application in action](screenshot.png).
+![Class Management App](screenshot.png)
 
 ## 🟢 Prerequisites
 
-A list of requirements and package versions that the reader needs to build and run the project.
-
-- The first thing.
-- The second thing.
+You must have the latest version of [PHP](https://www.php.net/) and [Composer](https://getcomposer.org/) installed on your machine. This project is tested against PHP 8.1.6.
 
 ## 📦 Getting started
 
-A brief guide to setting up the project.
+First, create a new working directory and change into it:
 
-- Do the first thing.
-- Do the next thing.
+```command
+mkdir class-management-app && cd class-management-app
+```
+
+Clone the project using the following command:
+
+```command
+git clone https://github.com/betterstack-community/class-management-app.git
+```
+
+Rename the `.env.example` file into `.env`:
+
+```command
+mv .env.example .env
+```
+
+Generate a new `APP_KEY` by running the following Artisan command:
+
+```command
+php artisan key:generate
+```
+
+Open the `.env` file and edit the path to the .sqlite database based on your system:
+
+```text
+[label .env]
+. . .
+DB_CONNECTION=sqlite
+DB_DATABASE="<absolute_path_to>/database.sqlite"
+DB_FOREIGN_KEYS=true
+```
+
+And finally, start the dev server:
+
+```command
+php artisan serve
+```
+
+Open your browser and go to [http://127.0.0.1:8000](http://127.0.0.1:8000). You should see the home page of the class management app.
 
 ## ⚖ License
 

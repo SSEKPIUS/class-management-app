@@ -4,6 +4,9 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\StudentFailClass;
+use App\Models\Student;
 
 class Kernel extends ConsoleKernel
 {
@@ -15,7 +18,39 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->command("inspire")->hourly();
+
+        $schedule
+            ->command("inspire")
+            ->everyMinute()
+            ->sendOutputTo(
+                "scheduler-output.log"
+            );
+
+        $schedule
+            ->exec("sh scripts/backup.bash")
+            ->everyMinute()
+            ->after(function () {
+                file_get_contents(
+                    "https://betteruptime.com/api/v1/heartbeat/<api_key>"
+                );
+            });
+
+        $schedule
+            ->call(function () {
+                Mail::to("huericnan@gmail.com")->send(new StudentFailClass());
+            })
+            ->everyMinute()
+            ->when(function () {
+                $students = Student::all();
+                foreach ($students as $student) {
+                    if ($student->average < 50) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            });
     }
 
     /**
@@ -25,8 +60,8 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . "/Commands");
 
-        require base_path('routes/console.php');
+        require base_path("routes/console.php");
     }
 }

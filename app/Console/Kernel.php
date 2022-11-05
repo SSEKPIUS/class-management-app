@@ -6,6 +6,7 @@ use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\StudentFailClass;
+use App\Mail\WeeklyReport;
 use App\Models\Student;
 
 class Kernel extends ConsoleKernel
@@ -23,12 +24,10 @@ class Kernel extends ConsoleKernel
         $schedule
             ->command("inspire")
             ->everyMinute()
-            ->sendOutputTo(
-                "scheduler-output.log"
-            );
+            ->sendOutputTo("scheduler-output.log");
 
         $schedule
-            ->exec("sh scripts/backup.bash")
+            ->exec("bash scripts/backup.bash")
             ->everyMinute()
             ->after(function () {
                 file_get_contents(
@@ -51,6 +50,14 @@ class Kernel extends ConsoleKernel
                     }
                 }
             });
+
+        $schedule
+            ->call(function () {
+                Mail::to("huericnan@gmail.com")->send(
+                    new WeeklyReport(Student::all())
+                );
+            })
+            ->everyMinute();
     }
 
     /**

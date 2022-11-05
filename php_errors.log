@@ -1,0 +1,7 @@
+[04-Nov-2022 18:53:29 UTC] PHP Warning:  require(/Users/erichu/Documents/Better Stack/demos/class-management-app/vendor/autoload.php): Failed to open stream: No such file or directory in /Users/erichu/Documents/Better Stack/demos/class-management-app/artisan on line 18
+[04-Nov-2022 18:53:29 UTC] PHP Stack trace:
+[04-Nov-2022 18:53:29 UTC] PHP   1. {main}() /Users/erichu/Documents/Better Stack/demos/class-management-app/artisan:0
+[04-Nov-2022 18:53:29 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/Users/erichu/Documents/Better Stack/demos/class-management-app/vendor/autoload.php' (include_path='.:/opt/homebrew/Cellar/php/8.1.7/share/php/pear') in /Users/erichu/Documents/Better Stack/demos/class-management-app/artisan:18
+Stack trace:
+#0 {main}
+  thrown in /Users/erichu/Documents/Better Stack/demos/class-management-app/artisan on line 18

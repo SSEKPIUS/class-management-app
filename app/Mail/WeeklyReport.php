@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\Student;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -9,18 +10,25 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class StudentFailClass extends Mailable
+class WeeklyReport extends Mailable
 {
     use Queueable, SerializesModels;
+
+    /**
+     * The student instance.
+     *
+     * @var \App\Models\Student
+     */
+    public $students;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($students)
     {
-        //
+        $this->students = $students;
     }
 
     /**
@@ -30,7 +38,7 @@ class StudentFailClass extends Mailable
      */
     public function envelope()
     {
-        return new Envelope(subject: "Student Fail Class");
+        return new Envelope(subject: "Weekly Report");
     }
 
     /**
@@ -40,7 +48,7 @@ class StudentFailClass extends Mailable
      */
     public function content()
     {
-        return new Content(view: "emails.studentFailClass");
+        return new Content(view: "index");
     }
 
     /**
